@@ -157,7 +157,6 @@ button:active {
   background-color: white;
   width: 100%;
   height: 40px;
-  /* border-bottom: 1px solid red; */
 }
 
 .refresh-button:hover {
@@ -183,6 +182,7 @@ button:active {
   border-radius: 8px;
   z-index: 100000;
   padding: 16px 0px 16px 16px;
+  max-height: 75%;
 }
 
 .history-math_content__text {
@@ -191,7 +191,6 @@ button:active {
 
 .history-math_content {
   overflow: auto;
-  max-height: 200px;
 }
 
 .history-math_content__item {
@@ -232,6 +231,12 @@ button:active {
   background-color: rgba(60,64,67,.04);
 }
 
+.content_item__button.content_item__button-Error {
+  color: #dadce0;
+  background-color: #f8f9fa;
+  border: none;
+}
+
 @media (max-width: 400px) {
   .calculator,
   .history-math {
@@ -241,6 +246,5 @@ button:active {
   .history-math {
     top: 0px;
     left: 0px;
-    height: 60%;
   }
 }

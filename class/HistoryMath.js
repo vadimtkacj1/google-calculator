@@ -3,14 +3,33 @@ class HistoryMath {
   static countItem = 0;
 
   static addMath(elem, str, sum) {
-    elem.insertAdjacentHTML(
-      "beforeend",
-      `<div class="history-math_content__item" data-index="${HistoryMath.countItem}">
-      <p class="content_item__button-left content_item__button">${str}</p>
-      <p class="content_item__center">=</p>
-      <p class="content_item__button-right content_item__button">${sum}</p>
-    </div>`
-    );
+    const div = document.createElement("div");
+    div.classList.add("history-math_content__item");
+    div.dataset.index = HistoryMath.countItem;
+
+    const pLeft = document.createElement("p");
+    pLeft.textContent = str;
+    pLeft.classList.add("content_item__button-left");
+    pLeft.classList.add("content_item__button");
+
+    const pCenter = document.createElement("p");
+    pCenter.classList.add("content_item__center");
+    pCenter.textContent = "=";
+
+    const pRight = document.createElement("p");
+
+    if (sum === undefined) {
+      sum = "Error";
+      pRight.classList.add("content_item__button-Error");
+    }
+
+    pRight.classList.add("content_item__button-right");
+    pRight.classList.add("content_item__button");
+    pRight.textContent = sum;
+
+    div.append(pLeft, pCenter, pRight);
+
+    elem.append(div);
 
     HistoryMath.arrayHistoryMath.push([str, sum]);
 

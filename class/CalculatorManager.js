@@ -15,6 +15,9 @@ class CalculatorManager {
   #eventHistoryMathResult() {
     this.#board.historyMathContent.addEventListener("click", (event) => {
       const target = event.target;
+
+      if (target.classList.contains('content_item__button-Error')) return;
+
       const result = HistoryMath.getMathElement(target);
 
       if (result)

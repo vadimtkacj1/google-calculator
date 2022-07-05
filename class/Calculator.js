@@ -196,6 +196,7 @@ class Calculator {
   isSum() {
     const lastSymbolMathStr = this.#mathStr[this.lengthMathStr - 1];
     const mathStrFindLeftBracket = this.#mathStr.split("").includes("(");
+    let prevSumForHistoryMath;
 
     this.#animationFieldInSum();
 
@@ -225,20 +226,25 @@ class Calculator {
 
     if (this.#mathStr.split(" ").length > 1 || mathStrFindLeftBracket)
       this.#mathStr = String(this.#mathOperation.math(this.#mathStr));
-
-    this.#prevSum = this.#rounding(String(Number(this.#mathStr)));
-
-    this.#board.fieldFirst.textContent = this.#rounding(
-      String(Number(this.#mathStr))
-    );
+      
+      if (this.#mathStr !== "NaN") {
+        this.#prevSum = this.#rounding(String(Number(this.#mathStr)));
+        prevSumForHistoryMath = this.#prevSum
+      this.#board.fieldFirst.textContent = this.#rounding(
+        String(Number(this.#mathStr))
+      );
+    }
 
     if (this.#board.historyMathContentText)
       this.#board.historyMathContentText.remove();
-      HistoryMath.addMath(
+    HistoryMath.addMath(
       this.#board.historyMathContent,
       strHistoryMath,
-      this.#prevSum
+      prevSumForHistoryMath
     );
+
+    if (this.#mathStr === "NaN") this.#board.fieldFirst.textContent = "Error";
+
     this.#bracketsRightStr = "";
     this.#mathStr = "";
   }
@@ -391,9 +397,11 @@ class Calculator {
       return;
     }
 
-    if (lastSymbolMathStr !== "%" && lastSymbolMathStr !== ')') this.#mathStr += valueElement;
+    if (lastSymbolMathStr !== "%" && lastSymbolMathStr !== ")")
+      this.#mathStr += valueElement;
 
-    if (lastSymbolMathStr === "%" || lastSymbolMathStr === ')') this.#mathStr += " × " + valueElement;
+    if (lastSymbolMathStr === "%" || lastSymbolMathStr === ")")
+      this.#mathStr += " × " + valueElement;
 
     this.#board.fieldFirst.textContent = this.#mathStr;
     this.#isAddRigthBrackets(this.#board.fieldFirst);
