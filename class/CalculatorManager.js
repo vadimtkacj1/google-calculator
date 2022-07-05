@@ -12,7 +12,7 @@ class CalculatorManager {
     this.#boardElement = boardElement;
   }
 
-  eventHistoryMathResult() {
+  #eventHistoryMathResult() {
     this.#board.historyMathContent.addEventListener("click", (event) => {
       const target = event.target;
       const result = HistoryMath.getMathElement(target);
@@ -26,7 +26,7 @@ class CalculatorManager {
     });
   }
 
-  eventHistoryMathHide() {
+  #eventHistoryMathHide() {
     document.addEventListener("click", (event) => {
       const target = event.target;
 
@@ -39,7 +39,7 @@ class CalculatorManager {
     });
   }
 
-  eventHistoryMathShow() {
+  #eventHistoryMathShow() {
     this.#board.elementEvent.addEventListener("click", (event) => {
       const target = event.target;
 
@@ -48,7 +48,7 @@ class CalculatorManager {
     });
   }
 
-  eventCalculator() {
+  #eventCalculator() {
     this.#board.elementEvent.addEventListener("click", (event) => {
       const target = event.target;
 
@@ -103,13 +103,13 @@ class CalculatorManager {
   init() {
     this.#boardElement.insertAdjacentHTML("beforeend", this.#board.init());
 
-    this.eventHistoryMathResult();
+    this.#eventHistoryMathResult();
 
-    this.eventHistoryMathHide();
+    this.#eventHistoryMathHide();
 
-    this.eventHistoryMathShow();
+    this.#eventHistoryMathShow();
 
-    this.eventCalculator();
+    this.#eventCalculator();
   }
 }
 

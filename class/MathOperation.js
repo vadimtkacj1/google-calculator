@@ -5,7 +5,7 @@ class MathOperation {
     this.#options = options;
   }
 
-  findRightBracket(array) {
+  #findRightBracket(array) {
     let countBracketsRigth = 1;
     let indexBracketRigth = 0;
 
@@ -23,12 +23,10 @@ class MathOperation {
     return indexBracketRigth;
   }
 
-  math(str) {
-    let array = str.split("");
-
+  #mathBrackets(array) {
     while (array.includes("(")) {
       const indexLeftBracket = array.indexOf("(");
-      const indexRightBracket = this.findRightBracket(
+      const indexRightBracket = this.#findRightBracket(
         array.slice(indexLeftBracket + 1)
       );
 
@@ -46,18 +44,26 @@ class MathOperation {
       );
     }
 
-    array = array.join("").split(" ");
+    return array;
+  }
+
+  math(str) {
+    const array = this.#mathBrackets(str.split("")).join("").split(" ");
 
     this.#options.forEach((ar) => {
       if (!array.includes(ar[0])) return;
-  
+
       for (let index = 1; index < array.length; index += 2) {
         if (array[index] !== ar[0]) continue;
-        
-        array.splice(index - 1, 3, ar[1](Number(array[index - 1]), Number(array[index + 1])));
-        
+
+        array.splice(
+          index - 1,
+          3,
+          ar[1](Number(array[index - 1]), Number(array[index + 1]))
+        );
+
         if (!array.includes(ar[0])) break;
-  
+
         index -= 2;
       }
     });

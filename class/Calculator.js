@@ -29,7 +29,7 @@ class Calculator {
     this.#board = board;
   }
 
-  isAddRigthBrackets(elem) {
+  #isAddRigthBrackets(elem) {
     if (this.#bracketsRightStr.length === 0) return;
 
     elem.insertAdjacentHTML(
@@ -38,7 +38,7 @@ class Calculator {
     );
   }
 
-  preparationStr(str) {
+  #preparationStr(str) {
     return str
       .split("")
       .map((elem, index) => {
@@ -74,7 +74,7 @@ class Calculator {
       .join("");
   }
 
-  checkBracketsInStr(str) {
+  #checkBracketsInStr(str) {
     if (!str) return "";
 
     return str.split("").includes("(")
@@ -96,10 +96,10 @@ class Calculator {
       arrayMathStr.length > 2
         ? arrayMathStr[arrayMathStr.length - 3]
         : arrayMathStr.pop();
-    const countInterestLastElem = this.checkBracketsInStr(lastElementMathStr)
+    const countInterestLastElem = this.#checkBracketsInStr(lastElementMathStr)
       .split("")
       .filter((elem) => elem === "%").length;
-    const countInterestPrevLastElem = this.checkBracketsInStr(
+    const countInterestPrevLastElem = this.#checkBracketsInStr(
       prevLastElementMathStr
     )
       .split("")
@@ -121,7 +121,7 @@ class Calculator {
         this.#mathStr.slice(0, this.#mathStr.length - 3) + valueElement;
 
     this.#board.fieldFirst.textContent = this.#mathStr;
-    this.isAddRigthBrackets(this.#board.fieldFirst);
+    this.#isAddRigthBrackets(this.#board.fieldFirst);
   }
 
   isBrackets(elem) {
@@ -164,24 +164,24 @@ class Calculator {
       lengthBracketsLeft > lengthBracketsRight &&
       lastSymbolMathStr !== "("
     ) {
-      this.removeElementBracketsRightStr();
+      this.#removeElementBracketsRightStr();
       this.#mathStr += elem.dataset.value;
     }
 
     if (this.lengthMathStr === 0) this.#mathStr = "0";
 
     this.#board.fieldFirst.textContent = this.#mathStr;
-    this.isAddRigthBrackets(this.#board.fieldFirst);
+    this.#isAddRigthBrackets(this.#board.fieldFirst);
   }
 
-  removeElementBracketsRightStr() {
+  #removeElementBracketsRightStr() {
     this.#bracketsRightStr = this.#bracketsRightStr.slice(
       0,
       this.#bracketsRightStr.length - 1
     );
   }
 
-  animationFieldInSum() {
+  #animationFieldInSum() {
     this.#board.fieldSecond.style.fontSize = "30px";
     this.#board.fieldSecond.style.color = "#202124";
     this.#board.fieldFirst.style.top = "30px";
@@ -197,7 +197,7 @@ class Calculator {
     const lastSymbolMathStr = this.#mathStr[this.lengthMathStr - 1];
     const mathStrFindLeftBracket = this.#mathStr.split("").includes("(");
 
-    this.animationFieldInSum();
+    this.#animationFieldInSum();
 
     if (lastSymbolMathStr === "(") return;
 
@@ -218,17 +218,17 @@ class Calculator {
     const strHistoryMath = this.#mathStr;
 
     if (mathStrFindLeftBracket)
-      this.#mathStr = this.preparationStr(this.#mathStr);
+      this.#mathStr = this.#preparationStr(this.#mathStr);
 
     if (this.#mathStr.includes("%"))
-      this.#mathStr = this.interestMath(this.#mathStr);
+      this.#mathStr = this.#interestMath(this.#mathStr);
 
     if (this.#mathStr.split(" ").length > 1 || mathStrFindLeftBracket)
       this.#mathStr = String(this.#mathOperation.math(this.#mathStr));
 
-    this.#prevSum = this.rounding(String(Number(this.#mathStr)));
+    this.#prevSum = this.#rounding(String(Number(this.#mathStr)));
 
-    this.#board.fieldFirst.textContent = this.rounding(
+    this.#board.fieldFirst.textContent = this.#rounding(
       String(Number(this.#mathStr))
     );
 
@@ -243,7 +243,7 @@ class Calculator {
     this.#mathStr = "";
   }
 
-  interestMath(str) {
+  #interestMath(str) {
     return str
       .split(" ")
       .map((elem) => {
@@ -276,7 +276,7 @@ class Calculator {
       .join(" ");
   }
 
-  rounding(str) {
+  #rounding(str) {
     const arrayStr = str.split("");
     const indexSymbolE = arrayStr.indexOf("e");
     const findSymbolE = arrayStr.includes("e");
@@ -316,14 +316,14 @@ class Calculator {
     let countElement = 1;
 
     if (lastSymbolMathStr === "(") {
-      this.removeElementBracketsRightStr();
+      this.#removeElementBracketsRightStr();
     }
 
     if (lastSymbolMathStr === ")") {
       this.#bracketsRightStr += ")";
       this.#mathStr = this.#mathStr.slice(0, this.lengthMathStr - 1);
       this.#board.fieldFirst.textContent = this.#mathStr;
-      this.isAddRigthBrackets(this.#board.fieldFirst);
+      this.#isAddRigthBrackets(this.#board.fieldFirst);
       return;
     }
 
@@ -337,7 +337,7 @@ class Calculator {
       this.#mathStr = this.#mathStr.slice(0, this.lengthMathStr - countElement);
 
     this.#board.fieldFirst.textContent = this.#mathStr;
-    this.isAddRigthBrackets(this.#board.fieldFirst);
+    this.#isAddRigthBrackets(this.#board.fieldFirst);
   }
 
   isNumbers(elem) {
@@ -387,7 +387,7 @@ class Calculator {
       this.#mathStr =
         this.#mathStr.slice(0, this.#mathStr.length - 1) + valueElement;
       this.#board.fieldFirst.textContent = this.#mathStr;
-      this.isAddRigthBrackets(this.#board.fieldFirst);
+      this.#isAddRigthBrackets(this.#board.fieldFirst);
       return;
     }
 
@@ -396,7 +396,7 @@ class Calculator {
     if (lastSymbolMathStr === "%" || lastSymbolMathStr === ')') this.#mathStr += " × " + valueElement;
 
     this.#board.fieldFirst.textContent = this.#mathStr;
-    this.isAddRigthBrackets(this.#board.fieldFirst);
+    this.#isAddRigthBrackets(this.#board.fieldFirst);
   }
 
   isOperators(elem) {
@@ -408,7 +408,7 @@ class Calculator {
     if (lastSymbolMathStr === "(") {
       if (valueElement === "-") this.#mathStr += valueElement;
       this.#board.fieldFirst.textContent = this.#mathStr;
-      this.isAddRigthBrackets(this.#board.fieldFirst);
+      this.#isAddRigthBrackets(this.#board.fieldFirst);
       return;
     }
 
@@ -428,7 +428,7 @@ class Calculator {
     this.#mathStr += " " + valueElement + " ";
 
     this.#board.fieldFirst.textContent = this.#mathStr;
-    this.isAddRigthBrackets(this.#board.fieldFirst);
+    this.#isAddRigthBrackets(this.#board.fieldFirst);
   }
 
   substituteOperators(elem) {
@@ -452,7 +452,7 @@ class Calculator {
         " ";
 
     this.#board.fieldFirst.textContent = this.#mathStr;
-    this.isAddRigthBrackets(this.#board.fieldFirst);
+    this.#isAddRigthBrackets(this.#board.fieldFirst);
   }
 }
 
