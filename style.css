@@ -14,6 +14,7 @@ body {
   width: 360px;
   position: relative;
   color: black;
+  padding: 0 10px;
 }
 
 .wrapper-window__sum {
