@@ -14,7 +14,6 @@ body {
   width: 360px;
   position: relative;
   color: black;
-  padding: 0 10px;
 }
 
 .wrapper-window__sum {
@@ -231,4 +230,10 @@ button:active {
 
 .content_item__button:hover {
   background-color: rgba(60,64,67,.04);
+}
+
+@media (max-width: 400px) {
+  .calculator {
+    width: 95%;
+  }
 }
