@@ -5,21 +5,20 @@ import HistoryMath from "./HistoryMath.js";
 class CalculatorManager {
   #board = new Board();
   #calculator = "";
-  #historyMath = new HistoryMath();
   #boardElement = ''
 
   constructor(options, boardElement = document.body) {
-    this.#calculator = new Calculator(options, this.#board, this.#historyMath);
+    this.#calculator = new Calculator(options, this.#board);
     this.#boardElement = boardElement;
   }
 
   eventHistoryMathResult() {
     this.#board.historyMathContent.addEventListener("click", (event) => {
       const target = event.target;
-      const result = this.#historyMath.getMathElement(target);
+      const result = HistoryMath.getMathElement(target);
 
       if (result)
-        this.#historyMath.eventHistoryMath(
+        HistoryMath.eventHistoryMath(
           this.#board,
           this.#calculator,
           result

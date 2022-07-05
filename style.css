@@ -233,7 +233,14 @@ button:active {
 }
 
 @media (max-width: 400px) {
-  .calculator {
+  .calculator,
+  .history-math {
     width: 95%;
+  }
+
+  .history-math {
+    top: 0px;
+    left: 0px;
+    height: 60%;
   }
 }

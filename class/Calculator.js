@@ -1,4 +1,5 @@
 import MathOperation from "./MathOperation.js";
+import HistoryMath from "./HistoryMath.js";
 
 class Calculator {
   get lengthMathStr() {
@@ -22,12 +23,10 @@ class Calculator {
   #bracketsRightStr = "";
   #board = "";
   #mathOperation = "";
-  #historyMath = "";
 
-  constructor(options, board, historyMath) {
+  constructor(options, board) {
     this.#mathOperation = new MathOperation(options);
     this.#board = board;
-    this.#historyMath = historyMath;
   }
 
   isAddRigthBrackets(elem) {
@@ -235,7 +234,7 @@ class Calculator {
 
     if (this.#board.historyMathContentText)
       this.#board.historyMathContentText.remove();
-    this.#historyMath.addMath(
+      HistoryMath.addMath(
       this.#board.historyMathContent,
       strHistoryMath,
       this.#prevSum
