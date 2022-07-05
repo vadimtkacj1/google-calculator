@@ -1,0 +1,233 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  margin-top: 200px;
+}
+
+.calculator {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 360px;
+  position: relative;
+  color: black;
+}
+
+.wrapper-window__sum {
+  width: 92%;
+  height: 70px;
+  border-radius: 7px;
+  border: 1px solid #ebebeb;
+  margin-bottom: 5px;
+  position: relative;
+  overflow: hidden;
+  padding: 10px 14px 0 10px;
+  white-space: nowrap;
+}
+
+.window__sum {
+  overflow: hidden;
+  display: flex;
+  justify-content: space-around;
+  height: 100%;
+  align-items: flex-end; 
+  flex-direction: column;
+}
+
+.wrapper-window__sum:hover {
+  border-top: 1px solid #70757a;
+}
+
+.wrapper-window__sum:active {
+  border: 1px solid #4285f4;
+  box-shadow: -1px -1px #cacaca;
+}
+
+.boxs {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+button {
+  width: 100%;
+  height: 35px;
+  color: black;
+  margin: 4px;
+  border: none;
+  border-radius: 5px;
+  background-color: #dadce0;
+  cursor: pointer;
+}
+
+button:active {
+  border: 1px solid #70757a;
+}
+
+.field {
+  font-size: 25px;
+  margin: 0;
+  color: #202124;
+  display: flex;
+  flex-direction: row;
+  transition: all 0.1s;
+  position: relative;
+  margin-bottom: 5px;
+}
+
+.field-2 {
+  color: #858585;
+  font-size: 15px;
+  transition: all 0.1s;
+  margin: 0;
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  justify-content: flex-end;
+}
+
+.box {
+  display: flex;
+}
+
+.calculator button.sum {
+  background-color: #4286f5;
+  color: #fff;
+  font-weight: 900;
+}
+
+#point {
+  font-weight: 800;
+}
+
+.numbers {
+  background-color: #f1f3f4;
+}
+
+.operators {
+  font-size: 17px;
+}
+
+.numbers:active {
+  border: 1px solid #dadce0;
+}
+
+.indentation_operators {
+  margin: 0px 5px;
+}
+
+.indentation_equals {
+  margin: 0px 0px 0px 5px;
+}
+
+.icon__history {
+  color: #858585;
+}
+
+.bracketsRight {
+  color: rgb(204, 204, 204);
+}
+
+.refresh-button svg,
+.history-math_button svg {
+  width: 20px;
+  height: 20px;
+  color: #70757a;
+  fill: currentColor;
+  display: flex;
+  justify-content: flex-start;
+  z-index: 10000;
+}
+
+.history-math_button svg {
+  color: #1a73e8;
+}
+
+.refresh-button {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
+
+.history-math_button {
+  background-color: white;
+  width: 100%;
+  height: 40px;
+  /* border-bottom: 1px solid red; */
+}
+
+.refresh-button:hover {
+  color: #3c4043;
+}
+
+.history-math_button:active {
+  color: #70757a;
+}
+
+.history-math {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  left: -5px;
+  top: -5px;
+  background-color: white;
+  color: #70757a;
+  width: 348px;
+  text-align: center;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 28%);
+  border-collapse: separate;
+  border-radius: 8px;
+  z-index: 100000;
+  padding: 16px 0px 16px 16px;
+}
+
+.history-math_content__text {
+  padding: 0px 25px 12px 8px;
+}
+
+.history-math_content {
+  overflow: auto;
+  max-height: 200px;
+}
+
+.history-math_content__item {
+  display: flex;
+  align-items: center;
+  padding: 0px 16px 0px 0px;
+}
+
+.history-math_content__item:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.history-math_content__item p {
+  margin: 0px;
+}
+
+.content_item__button {
+  border: 1px solid #ebebeb;
+  border-radius: 4px;
+  color: #1a73e8;
+  font-size: 14px;
+  box-sizing: border-box;
+  padding: 6px 12px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.content_item__center {
+  color: #70757a;
+  font-size: 20px;
+  width: 30px;
+  min-width: 30px;
+}
+
+.content_item__button:hover {
+  background-color: rgba(60,64,67,.04);
+}
