@@ -391,9 +391,9 @@ class Calculator {
       return;
     }
 
-    if (lastSymbolMathStr !== "%") this.#mathStr += valueElement;
+    if (lastSymbolMathStr !== "%" && lastSymbolMathStr !== ')') this.#mathStr += valueElement;
 
-    if (lastSymbolMathStr === "%") this.#mathStr += " × " + valueElement;
+    if (lastSymbolMathStr === "%" || lastSymbolMathStr === ')') this.#mathStr += " × " + valueElement;
 
     this.#board.fieldFirst.textContent = this.#mathStr;
     this.isAddRigthBrackets(this.#board.fieldFirst);
