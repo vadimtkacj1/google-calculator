@@ -200,6 +200,8 @@ class Calculator {
 
     this.#animationFieldInSum();
 
+    if (lastSymbolMathStr === "r") return;
+
     if (lastSymbolMathStr === "(") return;
 
     if (lastSymbolMathStr === " ") return;
@@ -226,10 +228,10 @@ class Calculator {
 
     if (this.#mathStr.split(" ").length > 1 || mathStrFindLeftBracket)
       this.#mathStr = String(this.#mathOperation.math(this.#mathStr));
-      
-      if (this.#mathStr !== "NaN") {
-        this.#prevSum = this.#rounding(String(Number(this.#mathStr)));
-        prevSumForHistoryMath = this.#prevSum
+
+    if (this.#mathStr !== "NaN") {
+      this.#prevSum = this.#rounding(String(Number(this.#mathStr)));
+      prevSumForHistoryMath = this.#prevSum;
       this.#board.fieldFirst.textContent = this.#rounding(
         String(Number(this.#mathStr))
       );
@@ -243,10 +245,13 @@ class Calculator {
       prevSumForHistoryMath
     );
 
-    if (this.#mathStr === "NaN") this.#board.fieldFirst.textContent = "Error";
+    if (this.#mathStr === "NaN") {
+      this.#board.fieldFirst.textContent = "Error";
+      this.#mathStr = "Error";
+    }
 
     this.#bracketsRightStr = "";
-    this.#mathStr = "";
+    if (this.#mathStr !== "Error") this.#mathStr = "";
   }
 
   #interestMath(str) {
@@ -403,6 +408,8 @@ class Calculator {
     if (lastSymbolMathStr === "%" || lastSymbolMathStr === ")")
       this.#mathStr += " × " + valueElement;
 
+    if (lastElementMathStr === "Error") this.#mathStr = valueElement;
+
     this.#board.fieldFirst.textContent = this.#mathStr;
     this.#isAddRigthBrackets(this.#board.fieldFirst);
   }
@@ -432,6 +439,8 @@ class Calculator {
     }
 
     if (this.lengthMathStr === 0) this.#mathStr += this.#prevSum;
+
+    if (lastSymbolMathStr === "r") this.mathStr = "0";
 
     this.#mathStr += " " + valueElement + " ";
 
